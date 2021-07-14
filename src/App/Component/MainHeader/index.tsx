@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
         width: `calc(100% - ${DRAWER_WIDTH}px)`,
         marginLeft: DRAWER_WIDTH,
       },
-      height: 100,
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -37,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const MainHeader = ({ handleDrawerToggle }: MainHeaderProps) => {
   const classes = useStyles();
   return (
-    <AppBar position="fixed" className={classes.appBar} color="inherit">
+    <AppBar position="fixed" className={classes.appBar} color='inherit'>
       <Toolbar>
         <IconButton
           color="inherit"
@@ -52,7 +51,7 @@ const MainHeader = ({ handleDrawerToggle }: MainHeaderProps) => {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          style={{ height: 100, marginLeft: 60 }}
+          style={{ marginLeft: 25 }}
         >
           <Typography variant="h6" noWrap>
             HOME

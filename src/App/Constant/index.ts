@@ -1,1 +1,2 @@
-export const DRAWER_WIDTH = 100;
+import { widthPercentageToDP } from './../../Lib/Utils/Responsive/index';
+export const DRAWER_WIDTH = widthPercentageToDP(7);

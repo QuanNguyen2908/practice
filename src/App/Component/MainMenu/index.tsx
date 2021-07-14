@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
@@ -20,6 +20,10 @@ import { Box } from "@material-ui/core";
 import HomeIcon from "../Svg/HomeIcon";
 import PersonIcon from "../Svg/PersonIcon";
 import StockIcon from "../Svg/StockIcon";
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from "../../../Lib/Utils/Responsive";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -44,18 +48,35 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     // necessary for content to be below app bar
-    toolbar: {
-      height: 100,
-    },
+    toolbar: theme.mixins.toolbar,
     drawerPaper: {
       width: DRAWER_WIDTH,
       backgroundColor: "#373B53",
-      borderRightWidth:0
+      borderRightWidth: 0,
     },
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
     },
+    iconStyle: {
+      display: "flex",
+      justifyContent: "center",
+      paddingRight: widthPercentageToDP(1),
+    },
+    activeTab: {
+      backgroundColor: "white",
+      borderTopLeftRadius: 5,
+      borderBottomLeftRadius: 5,
+      paddingTop: heightPercentageToDP(2),
+      paddingBottom: heightPercentageToDP(2),
+      '&:hover': {
+        backgroundColor: 'white',
+      }
+    },
+    inActiveTab: {
+      paddingTop: heightPercentageToDP(2),
+      paddingBottom: heightPercentageToDP(2),
+    }
   })
 );
 
@@ -71,7 +92,8 @@ function MainMenu(props: Props) {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [indexActive, setIndexActive] = useState(0);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -83,34 +105,33 @@ function MainMenu(props: Props) {
       <Box display="flex" justifyContent="center" style={{ paddingTop: 29 }}>
         <img src="logo.png" alt="Logo" />
       </Box>
-      <List>
-        <ListItem button style={{backgroundColor:'white'}}>
-          <ListItemIcon
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
+
+      <List style={{ paddingLeft: widthPercentageToDP(1) }}>
+        <ListItem
+          button
+          className={indexActive === 0 ? classes.activeTab : classes.inActiveTab}
+          onClick={() => setIndexActive(0)}
+          style={{ marginTop: heightPercentageToDP(2), marginBottom: heightPercentageToDP(2) }}
+        >
+          <ListItemIcon className={classes.iconStyle}>
             <HomeIcon />
           </ListItemIcon>
         </ListItem>
-        <ListItem button>
-          <ListItemIcon
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <PersonIcon/>
+        <ListItem button
+          onClick={() => setIndexActive(1)}
+          className={indexActive === 1 ? classes.activeTab : classes.inActiveTab}
+
+        >
+          <ListItemIcon className={classes.iconStyle}>
+            <PersonIcon />
           </ListItemIcon>
         </ListItem>
-        <ListItem button>
-          <ListItemIcon
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
+        <ListItem button
+          onClick={() => setIndexActive(2)}
+          className={indexActive === 2 ? classes.activeTab : classes.inActiveTab}
+
+        >
+          <ListItemIcon className={classes.iconStyle}>
             <StockIcon />
           </ListItemIcon>
         </ListItem>
