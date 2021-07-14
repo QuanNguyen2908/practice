@@ -15,6 +15,7 @@ import { DRAWER_WIDTH } from "../../Constant";
 
 interface MainHeaderProps {
   handleDrawerToggle: () => void;
+  indexActive: number
 }
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,8 +34,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const MainHeader = ({ handleDrawerToggle }: MainHeaderProps) => {
+const MainHeader = ({ handleDrawerToggle, indexActive }: MainHeaderProps) => {
   const classes = useStyles();
+  const renderTitle = ()=>{
+    if(indexActive===0){
+      return 'HOME'
+    }
+    if(indexActive===1){
+      return 'Profile'
+    }
+    return "Item"
+  }
   return (
     <AppBar position="fixed" className={classes.appBar} color='inherit'>
       <Toolbar>
@@ -54,7 +64,7 @@ const MainHeader = ({ handleDrawerToggle }: MainHeaderProps) => {
           style={{ marginLeft: 25 }}
         >
           <Typography variant="h6" noWrap>
-            HOME
+            {renderTitle()}
           </Typography>
         </Box>
       </Toolbar>

@@ -145,7 +145,7 @@ function MainMenu(props: Props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <MainHeader handleDrawerToggle={handleDrawerToggle} />
+      <MainHeader handleDrawerToggle={handleDrawerToggle} indexActive={indexActive} />
       <nav className={classes.drawer} aria-label="mailbox folders">
         <Hidden smUp implementation="css">
           <Drawer
