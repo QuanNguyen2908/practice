@@ -6,7 +6,6 @@ import Hidden from "@material-ui/core/Hidden";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Typography from "@material-ui/core/Typography";
 import {
   makeStyles,
   useTheme,
@@ -15,20 +14,18 @@ import {
 } from "@material-ui/core/styles";
 import { DRAWER_WIDTH } from "../../Constant";
 import MainHeader from "../MainHeader";
-import ELearningIcon from "../Svg/ElearningIcon";
 import { Box } from "@material-ui/core";
-import HomeIcon from "../Svg/HomeIcon";
-import PersonIcon from "../Svg/PersonIcon";
-import StockIcon from "../Svg/StockIcon";
-import {
-  heightPercentageToDP,
-  widthPercentageToDP,
-} from "../../../Lib/Utils/Responsive";
 import { Switch, Route } from "react-router-dom";
 import Profile from "../Profile";
 import Item from "../Item";
 import { useHistory, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import IconHomeBold from "../Svg/IconHomeBoid";
+import IconHomeLight from "../Svg/IconHomeLight";
+import IconProfileBold from "../Svg/IconProfileBold";
+import IconProfileLight from "../Svg/IconProfileLight";
+import IconPagerBold from "../Svg/IconPagerBold";
+import IconPagerLight from "../Svg/IconPagerLight";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -66,21 +63,21 @@ const useStyles = makeStyles((theme: Theme) =>
     iconStyle: {
       display: "flex",
       justifyContent: "center",
-      paddingRight: widthPercentageToDP(1),
+      paddingRight: 10,
     },
     activeTab: {
       backgroundColor: "white",
       borderTopLeftRadius: 5,
       borderBottomLeftRadius: 5,
-      paddingTop: heightPercentageToDP(2),
-      paddingBottom: heightPercentageToDP(2),
+      paddingTop: 18,
+      paddingBottom: 18,
       "&:hover": {
         backgroundColor: "white",
       },
     },
     inActiveTab: {
-      paddingTop: heightPercentageToDP(2),
-      paddingBottom: heightPercentageToDP(2),
+      paddingTop: 18,
+      paddingBottom: 18,
     },
   })
 );
@@ -103,9 +100,9 @@ function MainMenu(props: Props) {
   const location = useLocation();
 
   useEffect(() => {
-    const pathName = location.pathname
-    setActiveTab(pathName.substring(1))
-  },[])
+    const pathName = location.pathname;
+    setActiveTab(pathName.substring(1));
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -123,7 +120,7 @@ function MainMenu(props: Props) {
         <img src="logo.png" alt="Logo" />
       </Box>
 
-      <List style={{ paddingLeft: widthPercentageToDP(1) }}>
+      <List style={{ paddingLeft: 10 }}>
         <ListItem
           button
           className={
@@ -131,12 +128,12 @@ function MainMenu(props: Props) {
           }
           onClick={() => handleClickMenu("home")}
           style={{
-            marginTop: heightPercentageToDP(2),
-            marginBottom: heightPercentageToDP(2),
+            marginTop: 18,
+            marginBottom: 18,
           }}
         >
           <ListItemIcon className={classes.iconStyle}>
-            <HomeIcon />
+            {activeTab === "home" ? <IconHomeBold /> : <IconHomeLight />}
           </ListItemIcon>
         </ListItem>
         <ListItem
@@ -147,7 +144,11 @@ function MainMenu(props: Props) {
           }
         >
           <ListItemIcon className={classes.iconStyle}>
-            <PersonIcon />
+            {activeTab === "profile" ? (
+              <IconProfileBold />
+            ) : (
+              <IconProfileLight />
+            )}
           </ListItemIcon>
         </ListItem>
         <ListItem
@@ -158,7 +159,7 @@ function MainMenu(props: Props) {
           }
         >
           <ListItemIcon className={classes.iconStyle}>
-            <StockIcon />
+            {activeTab === "item" ? <IconPagerBold /> : <IconPagerLight />}
           </ListItemIcon>
         </ListItem>
       </List>
@@ -210,49 +211,8 @@ function MainMenu(props: Props) {
         <Switch>
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/item" component={Item} />
-          {/* <Route exact path='/cert/info' component={CertInfo} />
-						<Route exact path='/create' component={Create} />
-						<Route exact path='/create/cert' component={CreateCert} />
-						<Route exact path='/cert/edit' component={UpdateCert} />
-						<Route exact path='/create/topic' component={CreateTopic} />
-						<Route exact path='/topic/info' component={TopicInfo} />
-						<Route exact path='/create/question' component={CreateQuestion} />
-						<Route exact path='/exam' component={Exam} />
-						<Route exact path='/exam/create' component={CreateExam} />
-						<Route exact path='/exam/info' component={ExamInfo} />
-						<Route exact path='/exam/edit' component={EditExam} />
-						<Redirect to='/redaction' /> */}
+						{/* <Redirect to='/redaction' />  */}
         </Switch>
-        {/* <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography> */}
-        <ELearningIcon />
       </main>
     </div>
   );
