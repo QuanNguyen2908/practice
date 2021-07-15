@@ -24,6 +24,11 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from "../../../Lib/Utils/Responsive";
+import { Switch, Route } from "react-router-dom";
+import Profile from "../Profile";
+import Item from "../Item";
+import { useHistory, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -69,14 +74,14 @@ const useStyles = makeStyles((theme: Theme) =>
       borderBottomLeftRadius: 5,
       paddingTop: heightPercentageToDP(2),
       paddingBottom: heightPercentageToDP(2),
-      '&:hover': {
-        backgroundColor: 'white',
-      }
+      "&:hover": {
+        backgroundColor: "white",
+      },
     },
     inActiveTab: {
       paddingTop: heightPercentageToDP(2),
       paddingBottom: heightPercentageToDP(2),
-    }
+    },
   })
 );
 
@@ -93,10 +98,22 @@ function MainMenu(props: Props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [indexActive, setIndexActive] = useState(0);
+  const [activeTab, setActiveTab] = useState("home");
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    const pathName = location.pathname
+    setActiveTab(pathName.substring(1))
+  },[])
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleClickMenu = (tab: string) => {
+    setActiveTab(tab);
+    history.push(`/${tab}`);
   };
 
   const drawer = (
@@ -109,27 +126,36 @@ function MainMenu(props: Props) {
       <List style={{ paddingLeft: widthPercentageToDP(1) }}>
         <ListItem
           button
-          className={indexActive === 0 ? classes.activeTab : classes.inActiveTab}
-          onClick={() => setIndexActive(0)}
-          style={{ marginTop: heightPercentageToDP(2), marginBottom: heightPercentageToDP(2) }}
+          className={
+            activeTab === "home" ? classes.activeTab : classes.inActiveTab
+          }
+          onClick={() => handleClickMenu("home")}
+          style={{
+            marginTop: heightPercentageToDP(2),
+            marginBottom: heightPercentageToDP(2),
+          }}
         >
           <ListItemIcon className={classes.iconStyle}>
             <HomeIcon />
           </ListItemIcon>
         </ListItem>
-        <ListItem button
-          onClick={() => setIndexActive(1)}
-          className={indexActive === 1 ? classes.activeTab : classes.inActiveTab}
-
+        <ListItem
+          button
+          onClick={() => handleClickMenu("profile")}
+          className={
+            activeTab === "profile" ? classes.activeTab : classes.inActiveTab
+          }
         >
           <ListItemIcon className={classes.iconStyle}>
             <PersonIcon />
           </ListItemIcon>
         </ListItem>
-        <ListItem button
-          onClick={() => setIndexActive(2)}
-          className={indexActive === 2 ? classes.activeTab : classes.inActiveTab}
-
+        <ListItem
+          button
+          onClick={() => handleClickMenu("item")}
+          className={
+            activeTab === "item" ? classes.activeTab : classes.inActiveTab
+          }
         >
           <ListItemIcon className={classes.iconStyle}>
             <StockIcon />
@@ -145,7 +171,10 @@ function MainMenu(props: Props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <MainHeader handleDrawerToggle={handleDrawerToggle} indexActive={indexActive} />
+      <MainHeader
+        handleDrawerToggle={handleDrawerToggle}
+        activeTab={activeTab}
+      />
       <nav className={classes.drawer} aria-label="mailbox folders">
         <Hidden smUp implementation="css">
           <Drawer
@@ -178,7 +207,23 @@ function MainMenu(props: Props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph>
+        <Switch>
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/item" component={Item} />
+          {/* <Route exact path='/cert/info' component={CertInfo} />
+						<Route exact path='/create' component={Create} />
+						<Route exact path='/create/cert' component={CreateCert} />
+						<Route exact path='/cert/edit' component={UpdateCert} />
+						<Route exact path='/create/topic' component={CreateTopic} />
+						<Route exact path='/topic/info' component={TopicInfo} />
+						<Route exact path='/create/question' component={CreateQuestion} />
+						<Route exact path='/exam' component={Exam} />
+						<Route exact path='/exam/create' component={CreateExam} />
+						<Route exact path='/exam/info' component={ExamInfo} />
+						<Route exact path='/exam/edit' component={EditExam} />
+						<Redirect to='/redaction' /> */}
+        </Switch>
+        {/* <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
           dolor purus non enim praesent elementum facilisis leo vel. Risus at
@@ -206,7 +251,7 @@ function MainMenu(props: Props) {
           sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
           eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
           posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        </Typography> */}
         <ELearningIcon />
       </main>
     </div>

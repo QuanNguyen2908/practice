@@ -2,16 +2,16 @@ import React from 'react';
 import './App.css';
 import MainMenu from './App/Component/MainMenu';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import SignIn from './App/Component/SignIn';
 
 function App() {
   return (
     <Router>
     <Switch>
-    <Route exact path='/' component={MainMenu} />
-      {/* <Route exact path="/login" component={Login} /> */}
-      {/* <Route path='/dashboard' component={Dashboard} />
-      <Route exact path='/' component={Login} /> */}
+    <Route exact path='/' component={SignIn} />
+      <Route exact path="/login" component={SignIn} />
       <Route path='/home' component={MainMenu} />
+      <Route path='/' component={MainMenu} />
     </Switch>
   </Router>
   );
