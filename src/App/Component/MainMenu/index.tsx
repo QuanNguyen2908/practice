@@ -28,6 +28,7 @@ import IconProfileLight from "../Svg/IconProfileLight";
 import IconPagerBold from "../Svg/IconPagerBold";
 import IconPagerLight from "../Svg/IconPagerLight";
 import ChevronDown from "../Svg/ChevronDown";
+import HomePage from "../HomePage";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -258,6 +259,7 @@ function MainMenu(props: Props) {
         <div className={classes.toolbar} />
         <Switch>
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/home" component={HomePage} />
           <Route exact path="/item" component={Item} />
           {/* <Redirect to='/redaction' />  */}
         </Switch>
