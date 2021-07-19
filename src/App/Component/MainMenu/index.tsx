@@ -6,6 +6,7 @@ import Hidden from "@material-ui/core/Hidden";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import { Typography } from "@material-ui/core";
 import {
   makeStyles,
   useTheme,
@@ -26,6 +27,7 @@ import IconProfileBold from "../Svg/IconProfileBold";
 import IconProfileLight from "../Svg/IconProfileLight";
 import IconPagerBold from "../Svg/IconPagerBold";
 import IconPagerLight from "../Svg/IconPagerLight";
+import ChevronDown from "../Svg/ChevronDown";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -114,55 +116,101 @@ function MainMenu(props: Props) {
   };
 
   const drawer = (
-    <div>
-      <Divider />
-      <Box display="flex" justifyContent="center" style={{ paddingTop: 29 }}>
-        <img src="logo.png" alt="Logo" />
-      </Box>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        flex: 1,
+      }}
+    >
+      <Box>
+        <Divider />
+        <Box display="flex" justifyContent="center" style={{ paddingTop: 29 }}>
+          <img src="logo.png" alt="Logo" />
+        </Box>
 
-      <List style={{ paddingLeft: 10 }}>
-        <ListItem
-          button
-          className={
-            activeTab === "home" ? classes.activeTab : classes.inActiveTab
-          }
-          onClick={() => handleClickMenu("home")}
-          style={{
-            marginTop: 18,
-            marginBottom: 18,
-          }}
-        >
-          <ListItemIcon className={classes.iconStyle}>
-            {activeTab === "home" ? <IconHomeBold /> : <IconHomeLight />}
-          </ListItemIcon>
-        </ListItem>
-        <ListItem
-          button
-          onClick={() => handleClickMenu("profile")}
-          className={
-            activeTab === "profile" ? classes.activeTab : classes.inActiveTab
-          }
-        >
-          <ListItemIcon className={classes.iconStyle}>
-            {activeTab === "profile" ? (
-              <IconProfileBold />
-            ) : (
-              <IconProfileLight />
-            )}
-          </ListItemIcon>
-        </ListItem>
-        <ListItem
-          button
-          onClick={() => handleClickMenu("item")}
-          className={
-            activeTab === "item" ? classes.activeTab : classes.inActiveTab
-          }
-        >
-          <ListItemIcon className={classes.iconStyle}>
-            {activeTab === "item" ? <IconPagerBold /> : <IconPagerLight />}
-          </ListItemIcon>
-        </ListItem>
-      </List>
+        <List style={{ paddingLeft: 10 }}>
+          <ListItem
+            button
+            className={
+              activeTab === "home" ? classes.activeTab : classes.inActiveTab
+            }
+            onClick={() => handleClickMenu("home")}
+            style={{
+              marginTop: 18,
+              marginBottom: 18,
+            }}
+          >
+            <ListItemIcon className={classes.iconStyle}>
+              {activeTab === "home" ? <IconHomeBold /> : <IconHomeLight />}
+            </ListItemIcon>
+          </ListItem>
+          <ListItem
+            button
+            onClick={() => handleClickMenu("profile")}
+            className={
+              activeTab === "profile" ? classes.activeTab : classes.inActiveTab
+            }
+          >
+            <ListItemIcon className={classes.iconStyle}>
+              {activeTab === "profile" ? (
+                <IconProfileBold />
+              ) : (
+                <IconProfileLight />
+              )}
+            </ListItemIcon>
+          </ListItem>
+          <ListItem
+            button
+            onClick={() => handleClickMenu("item")}
+            className={
+              activeTab === "item" ? classes.activeTab : classes.inActiveTab
+            }
+          >
+            <ListItemIcon className={classes.iconStyle}>
+              {activeTab === "item" ? <IconPagerBold /> : <IconPagerLight />}
+            </ListItemIcon>
+          </ListItem>
+        </List>
+      </Box>
+      <Box
+        display="flex"
+        style={{ height: 90, flexDirection: "column", alignItems: "center" }}
+      >
+        <Divider light style={{ width: 100, backgroundColor: "#494E67" }} />
+        <Box display="flex" flex={1} flexDirection="column">
+          <Box display="flex" flex={0.5} alignItems="center">
+            <Typography
+              variant="subtitle2"
+              style={{
+                fontSize: 16,
+                lineHeight: 1,
+                color: "#6F809E",
+              }}
+            >
+              Help
+            </Typography>
+          </Box>
+          <Box display="flex" flex={1}>
+            <Typography
+              variant="subtitle2"
+              style={{
+                fontSize: 16,
+                lineHeight: 1,
+                color: "#6F809E",
+                marginTop: 3,
+                marginRight: 4,
+              }}
+            >
+              EN
+            </Typography>
+            <Box>
+              <ChevronDown />
+            </Box>
+          </Box>
+        </Box>
+      </Box>
     </div>
   );
 
@@ -211,7 +259,7 @@ function MainMenu(props: Props) {
         <Switch>
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/item" component={Item} />
-						{/* <Redirect to='/redaction' />  */}
+          {/* <Redirect to='/redaction' />  */}
         </Switch>
       </main>
     </div>
