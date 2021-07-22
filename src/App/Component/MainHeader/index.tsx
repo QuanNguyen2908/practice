@@ -74,7 +74,7 @@ const MainHeader = ({ handleDrawerToggle, activeTab }: MainHeaderProps) => {
           <Avatar
             style={{ width: 40, height: 40 }}
             alt="Avatar"
-            src="logo192.png"
+            src="https://thuthuatnhanh.com/wp-content/uploads/2020/09/hinh-nen-lamborghini-full-hd-xanh-den-ben-duong-bien.jpg"
           />
         </Box>
         <Divider orientation="vertical" style={{ height: "70%" }} />
